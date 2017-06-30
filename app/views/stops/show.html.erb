@@ -2,7 +2,7 @@
 
 <p>
   <strong>Trip:</strong>
-  <%= @stop.trip %>
+  <%= link_to @stop.trip.name, @stop.trip %>
 </p>
 
 <p>
@@ -16,4 +16,5 @@
 </p>
 
 <%= link_to 'Edit', edit_stop_path(@stop) %> |
+<%= link_to 'Delete', stop_path(@stop), method: :delete, data: { confirm: "Are you sure?" } %> |
 <%= link_to 'Back', stops_path %>

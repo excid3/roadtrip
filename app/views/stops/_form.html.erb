@@ -30,3 +30,20 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(setPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+function setPosition(position) {
+  document.querySelector("#stop_latitude").value  = position.coords.latitude
+  document.querySelector("#stop_longitude").value = position.coords.longitude
+}
+
+getLocation()
+</script>

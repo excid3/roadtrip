@@ -15,7 +15,7 @@
   <tbody>
     <% @stops.each do |stop| %>
       <tr>
-        <td><%= stop.trip %></td>
+        <td><%= link_to stop.trip.name, stop.trip %></td>
         <td><%= stop.latitude %></td>
         <td><%= stop.longitude %></td>
         <td><%= link_to 'Show', stop %></td>

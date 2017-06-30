@@ -14,7 +14,7 @@ class StopsController < ApplicationController
 
   # GET /stops/new
   def new
-    @stop = Stop.new
+    @stop = Stop.new(trip_id: params[:trip_id])
   end
 
   # GET /stops/1/edit

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Trip:</strong>
+  <%= @stop.trip %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @stop.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @stop.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_stop_path(@stop) %> |
+<%= link_to 'Back', stops_path %>

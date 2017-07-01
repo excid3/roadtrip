@@ -11,38 +11,62 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :trip_id %>
-    <%= form.text_field :trip_id, id: :stop_trip_id %>
+  <div class="form-group">
+    <p data-behavior="loading-coordinates" class="text-muted" style="display:none"><%= fa_icon "spinner spin" %> Retrieving coordinates...</p>
+
+    <div class="row">
+      <div class="col">
+        <%= form.label :latitude %>
+        <%= form.text_field :latitude, class: "form-control", placeholder: "Loading...", id: :stop_latitude %>
+      </div>
+      <div class="col">
+        <%= form.label :longitude %>
+        <%= form.text_field :longitude, class: "form-control", placeholder: "Loading...", id: :stop_longitude %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :latitude %>
-    <%= form.text_field :latitude, id: :stop_latitude %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control", autofocus: true %>
   </div>
 
-  <div class="field">
-    <%= form.label :longitude %>
-    <%= form.text_field :longitude, id: :stop_longitude %>
+  <div class="form-group">
+    <%= form.label :visited_at %>
+    <%= form.datetime_select :visited_at, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group text-right">
+    <%= form.hidden_field :trip_id, id: :stop_trip_id %>
+    <%= form.button "Save Stop", class: "btn btn-primary", id: "save_button" %>
   </div>
 <% end %>
 
 <script>
 function getLocation() {
+  // If browser supports geolocation and we don't already have coords, try to get it
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(setPosition);
+    if (document.getElementById("stop_latitude").value == "") {
+      showLoadingCoords()
+      navigator.geolocation.getCurrentPosition(setPosition);
+    }
   } else {
     console.log("Geolocation is not supported by this browser.");
   }
 }
 
 function setPosition(position) {
-  document.querySelector("#stop_latitude").value  = position.coords.latitude
-  document.querySelector("#stop_longitude").value = position.coords.longitude
+  hideLoadingCoords()
+  document.getElementById("stop_latitude").value  = position.coords.latitude
+  document.getElementById("stop_longitude").value = position.coords.longitude
+}
+
+function showLoadingCoords() {
+  document.querySelector("[data-behavior='loading-coordinates']").style.display = 'block'
+}
+
+function hideLoadingCoords() {
+  document.querySelector("[data-behavior='loading-coordinates']").style.display = 'none'
 }
 
 getLocation()

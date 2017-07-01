@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :trip_name %>
+    <%= form.text_field :name, class: "form-control", id: :trip_name, placeholder: "Vacation 2017", autofocus: true %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group text-right">
+    <%= form.button "Save Trip", class: "btn btn-primary" %>
   </div>
 <% end %>

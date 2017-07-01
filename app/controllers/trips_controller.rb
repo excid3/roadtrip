@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   # GET /trips
@@ -10,6 +11,15 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
+    @stops = @trip.stops.map do |stop|
+      {
+        id: stop.id,
+        name: stop.display_name,
+        latitude: stop.latitude,
+        longitude: stop.longitude,
+        url: stop_path(stop),
+      }
+    end
   end
 
   # GET /trips/new

@@ -1,0 +1,48 @@
+<h1>Offline Checkin</h1>
+
+<div class="card card-block mb-3">
+  <%= form_with url: "", local: true, data: { behavior: "geocode-form offline-stop-form" } do |form| %>
+    <div class="form-group">
+      <p data-behavior="loading-coordinates" class="text-muted" style="display:none"><%= fa_icon "spinner spin" %> Retrieving coordinates...</p>
+
+      <div class="row">
+        <div class="col">
+          <%= form.label :latitude %>
+          <%= form.text_field :latitude, class: "form-control", placeholder: "Loading...", id: :stop_latitude %>
+        </div>
+        <div class="col">
+          <%= form.label :longitude %>
+          <%= form.text_field :longitude, class: "form-control", placeholder: "Loading...", id: :stop_longitude %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "form-control", autofocus: true %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :visited_at %>
+      <%= form.datetime_select :visited_at, class: "form-control" %>
+    </div>
+
+    <div class="form-group text-right">
+      <%= form.button "🌵", class: "btn btn-outline-success" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="card mb-3">
+  <table class="table" id="pending_stops">
+    <thead>
+      <tr>
+        <th>Location</th>
+        <th>Name</th>
+        <th>Visited</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>

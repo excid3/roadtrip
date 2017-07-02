@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :stops
-  resources :trips
+  resources :trips do
+    resources :stops
+  end
 
   root to: "trips#index"
 end

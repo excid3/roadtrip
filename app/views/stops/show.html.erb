@@ -18,5 +18,5 @@
   <%= @stop.longitude %>
 </p>
 
-<%= link_to 'Edit', edit_stop_path(@stop) %> |
-<%= link_to 'Delete', stop_path(@stop), method: :delete, data: { confirm: "Are you sure?" } %>
+<%= link_to 'Edit', edit_trip_stop_path(@trip, @stop) %> |
+<%= link_to 'Delete', trip_stop_path(@trip, @stop), method: :delete, data: { confirm: "Are you sure?" } %>

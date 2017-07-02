@@ -1,11 +1,12 @@
 class StopsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_stop, only: [:show, :edit, :update, :destroy]
+  before_action :set_stop, only: %w(show edit update destroy)
+  before_action :set_trip
 
   # GET /stops
   # GET /stops.json
   def index
-    @stops = Stop.all
+    redirect_to @trip
   end
 
   # GET /stops/1
@@ -29,7 +30,7 @@ class StopsController < ApplicationController
 
     respond_to do |format|
       if @stop.save
-        format.html { redirect_to @stop, notice: 'Stop was successfully created.' }
+        format.html { redirect_to trip_stop_url(@trip, @stop), notice: 'Stop was successfully created.' }
         format.json { render :show, status: :created, location: @stop }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class StopsController < ApplicationController
   def update
     respond_to do |format|
       if @stop.update(stop_params)
-        format.html { redirect_to @stop, notice: 'Stop was successfully updated.' }
+        format.html { redirect_to trip_stop_url(@trip, @stop), notice: 'Stop was successfully updated.' }
         format.json { render :show, status: :ok, location: @stop }
       else
         format.html { render :edit }
@@ -57,12 +58,17 @@ class StopsController < ApplicationController
   def destroy
     @stop.destroy
     respond_to do |format|
-      format.html { redirect_to stops_url, notice: 'Stop was successfully destroyed.' }
+      format.html { redirect_to trip_stops_url(@trip), notice: 'Stop was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+
+    def set_trip
+      @trip = Trip.find(params[:trip_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_stop
       @stop = Stop.find(params[:id])

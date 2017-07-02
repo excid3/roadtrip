@@ -15,12 +15,12 @@
     <p><strong>Stops</strong></p>
     <% @trip.stops.each do |stop| %>
       <div>
-        <%= link_to stop.display_name, stop %>
+        <%= link_to stop.display_name, trip_stop_path(@trip, stop) %>
       </div>
     <% end %>
 
     <br />
 
-    <%= link_to "Add stop", new_stop_path(trip_id: @trip.id), class: "btn btn-outline-primary" %>
+    <%= link_to "Add stop", new_trip_stop_path(trip_id: @trip.id), class: "btn btn-outline-primary" %>
   </div>
 </div>

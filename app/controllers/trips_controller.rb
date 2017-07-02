@@ -17,7 +17,7 @@ class TripsController < ApplicationController
         name: stop.display_name,
         latitude: stop.latitude,
         longitude: stop.longitude,
-        url: stop_path(stop),
+        url: new_trip_stop_path(@trip, stop),
       }
     end
   end
